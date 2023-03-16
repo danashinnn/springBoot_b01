@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+
+<div layout:fragment="content">
+  <div class="row mt-3">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          Board List
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Board List </h5>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Bno</th>
+                <th scope="col">Title</th>
+                <th scope="col">Writer</th>
+                <th scope="col">ReqDate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="dto:${responseDTO.dtoList}">
+                <th scope="row">[[${dto.bno}]]</th>
+                <td>
+                  [[${dto.title}]]
+                </td>
+                <td>[[${dto.writer}]]</td>
+                <td>[[${dto.regDate}]]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+  console.log("script.....")
+</script>
