@@ -48,11 +48,11 @@
                 <th scope="col">ReqDate</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody th:with="link = ${pageRequestDTO.getLink()}">
               <tr th:each="dto:${responseDTO.dtoList}">
                 <th scope="row">[[${dto.bno}]]</th>
                 <td>
-                  [[${dto.title}]]
+                  <a th:href="|@{/board/read(bno =${dto.bno})}&${link}|"> [[${dto.title}]] </a>
                 </td>
                 <td>[[${dto.writer}]]</td>
                 <td>[[${#temporals.format(dto.regDate, 'yyyy-MM-dd')}]]</td>
@@ -87,11 +87,11 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
+          <h5 class="modal-title">게시물 등록 성공</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+          <p>게시물이 등록되었습니다.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
