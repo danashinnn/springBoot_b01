@@ -58,7 +58,7 @@ public class PageRequestDTO {
                 }
             }
 
-            link = builder().toString();
+            link = builder.toString();
         }
 
         return link;

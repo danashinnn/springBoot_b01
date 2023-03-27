@@ -137,7 +137,14 @@
 
   const modal = new bootstrap.Modal(document.querySelector(".modal"))
 
-  if (result) {
+  if(result) {
+    // if (result == 'removed') {
+    //   const title = document.querySelector(".modal-title")
+    //   const body = document.querySelector(".modal-body")
+    //   title.innerText = "게시물 삭제 성공"
+    //   body.innerText = "게시물이 삭제되었습니다."
+    // }
     modal.show()
   }
+
 </script>
