@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.b01.domain.Board;
 import org.zerock.b01.domain.Reply;
+import org.zerock.b01.dto.BoardListReplyCountDTO;
 
 @SpringBootTest
 @Log4j2
@@ -36,6 +37,11 @@ public class ReplyRepositoryTests {
         replyRepository.save(reply);
     }
 
+    // Reply 클래스의 @ToString에서 exclude를 제거하면 에러가 남
+    // reply 테이블에서 쿼리를 실행했지만, Board 객체를 같이 출력해야 하므로 다시 board 테이블에 쿼리를 추가로 실행해야만 하는 상황이라
+    // 다시 데이터베이스를 연결해야 하는데 현재 테스트 코드는 한 번만 쿼리를 실행할 수 있기 때문임
+    // 강제로 이를 실행하기 위해 @Transactional 추가
+    // @Transactional 추가하면 reply 테이블에 쿼리가 실행되고 board 테이블에 추가 쿼리가 실행됨
     @Transactional
     @Test
     public void testBoardReplies() {
