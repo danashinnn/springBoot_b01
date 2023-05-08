@@ -195,4 +195,30 @@ public class BoardRepositoryTests {
         replyRepository.deleteByBoard_Bno(bno);
         boardRepository.deleteById(bno);
     }
+
+    @Test
+    public void testInsertAll() {
+        for (int i = 1; i <= 100; i++) {
+            Board board = Board.builder()
+                    .title("Title..." + i)
+                    .content("Content..." + i)
+                    .writer("writer.." + i)
+                    .build();
+
+            for (int j = 0; j < 3; j++) {
+                if (i % 5 == 0) {
+                    continue;
+                }
+                board.addImage(UUID.randomUUID().toString(), i+"file"+j+".jpg");
+            }
+            boardRepository.save(board);
+        }
+    }
+
+    @Transactional
+    @Test
+    public void testSearchImageReplyCount() {
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+        boardRepository.searchWithAll(null, null, pageable);
+    }
 }

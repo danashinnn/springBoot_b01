@@ -12,4 +12,6 @@ public interface BoardSearch {
     
     // 목록 처리는 Querydsl을 이용하는 구조이므로 추가 메소드 구현 
     Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types, String keyword, Pageable pageable);
+
+    Page<BoardListReplyCountDTO> searchWithAll(String[] types, String keyword, Pageable pageable);
 }
