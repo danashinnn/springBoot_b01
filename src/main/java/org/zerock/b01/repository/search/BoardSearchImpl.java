@@ -141,6 +141,25 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         JPQLQuery<Board> boardJPQLQuery = from(board);
         boardJPQLQuery.leftJoin(reply).on(reply.board.eq(board)); // left join
 
+        if((types != null && types.length > 0) && keyword != null) {
+            BooleanBuilder booleanBuilder = new BooleanBuilder(); // (
+
+            for(String type : types) {
+                switch (type) {
+                    case "t":
+                        booleanBuilder.or(board.title.contains(keyword));
+                        break;
+                    case "c":
+                        booleanBuilder.or(board.content.contains(keyword));
+                        break;
+                    case "w":
+                        booleanBuilder.or(board.writer.contains(keyword));
+                        break;
+                }
+            }
+            boardJPQLQuery.where(booleanBuilder);
+        }
+
         boardJPQLQuery.groupBy(board);
 
         getQuerydsl().applyPagination(pageable, boardJPQLQuery); // paging
